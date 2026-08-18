@@ -49,14 +49,20 @@ cinema-summary-poster/
 │   └── font-spec.md              # Font rules & anti-garble spec / 字体规范与防乱码
 ├── examples/
 │   └── good-example.md           # Positive/negative examples / 正例与反例参考
-└── assets/
-    └── README.md                 # Asset usage guide / 素材使用说明
+├── assets/
+│   └── README.md                 # Asset usage guide / 素材使用说明
+└── .github/
+    └── ISSUE_TEMPLATE/           # Issue templates / 议题模板
+        ├── bug-report.md         # Bug report template / Bug 报告模板
+        └── feature-request.md    # Feature request template / 功能建议模板
 ```
 
 ## Installation / 安装方式
 Send this repository link to an AI Agent that supports Skill installation (e.g., Claude Code, Codex) and say:
 将本仓库链接发送给支持 Skill 安装的 AI Agent（如 Claude Code、Codex 等），并说：
+
 > Install this Skill for me: https://github.com/{your-username}/cinema-summary-poster
+
 > 帮我安装这个 Skill：https://github.com/{your-username}/cinema-summary-poster
 
 Or manually copy `SKILL.md` to your Skill directory. No `.env` is required for Mode A.
@@ -69,6 +75,24 @@ Or manually copy `SKILL.md` to your Skill directory. No `.env` is required for M
 - **Body Font / 正文字体**: Kaiti Regular / 楷体 常规
 - **Watermark / 水印**: Disabled / 不添加
 - **Special Styles / 特殊风格**: Disabled / 不使用
+
+## Usage Examples / 使用示例
+只需输入片名，即可开始生成总结海报方案：
+Just enter a title to start generating a poster plan:
+
+> 帮我做一张《星际穿越》的总结海报
+
+> Make a summary poster for Interstellar
+
+随后按提示确认需求（片名、场景、风格、台词、字体等），并选择出图模式即可。
+Then confirm the requirements (title, scene, style, quote, font, etc.) and choose an output mode.
+
+## Feedback / 反馈与建议
+使用中遇到问题或有功能建议，请到 [Issues](https://github.com/jasonofchina/cinema-summary-poster/issues) 提交：
+Found a bug or have a suggestion? Please open an issue at [Issues](https://github.com/jasonofchina/cinema-summary-poster/issues):
+
+- 🐛 Bug 报告 / Bug report → 使用「Bug 报告 / Bug Report」模板
+- 💡 功能建议 / Feature request → 使用「功能建议 / Feature Request」模板
 
 ## Changelog / 更新日志
 - **v1.4 (2026-08-18)**: Added dual output modes (A: return prompt / B: user-key direct generation) with API-key security redlines and automatic fallback; `.env` now optional (missing → Mode A). / 新增双出图模式与 API Key 安全红线，失败自动回退；`.env` 改为可选，缺失默认模式 A。

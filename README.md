@@ -61,9 +61,9 @@ cinema-summary-poster/
 Send this repository link to an AI Agent that supports Skill installation (e.g., Claude Code, Codex) and say:
 将本仓库链接发送给支持 Skill 安装的 AI Agent（如 Claude Code、Codex 等），并说：
 
-> Install this Skill for me: https://github.com/{your-username}/cinema-summary-poster
+> Install this Skill for me: https://github.com/jasonofchina/cinema-summary-poster
 
-> 帮我安装这个 Skill：https://github.com/{your-username}/cinema-summary-poster
+> 帮我安装这个 Skill：https://github.com/jasonofchina/cinema-summary-poster
 
 Or manually copy `SKILL.md` to your Skill directory. No `.env` is required for Mode A.
 或手动将 SKILL.md 复制到你的 Skill 目录。模式 A 无需任何 `.env` 配置。

@@ -1,4 +1,4 @@
-#  Cinema Summary Poster / 影视总结海报生成器
+# 🎬 Cinema Summary Poster / 影视总结海报生成器
 
 > Input a movie or TV series, and AI will automatically generate a cinematic summary poster featuring classic quotes, core themes, and reviews.
 > 
@@ -8,7 +8,7 @@
 Style serves the story; simple but not simplistic. Sci-fi has digital texture, period dramas carry the charm of Xuan paper, and indie films hold the warmth of watercolors.
 每张海报都应贴合原片调性——科幻片有数字质感，古装片有宣纸韵味，文艺片有水彩温度。风格服务于故事，简洁而不简单。
 
-## ️ Pre-release Security Checklist / 发布前必做安全检查
+## ⚠️ Pre-release Security Checklist / 发布前必做安全检查
 Before every commit or release, the following MUST be executed:
 每次提交代码或发布新版本前，必须执行：
 
@@ -34,39 +34,17 @@ Before every commit or release, the following MUST be executed:
 - **Step 8**: Delivery & Confirmation / 交付与确认
 
 ## Directory Structure / 目录结构
+```text
 cinema-summary-poster/
-├── SKILL.md          # Core Skill Prompt / 核心 Skill 提示词
-├── README.md         # This file / 本文件
-├── .env.example      # API Key Environment Variable Template / API Key 环境变量模板
-├── references/       # Reference materials (with asset requirement list) / 参考资料（含素材需求清单）
-├── examples/         # Example posters (with asset requirement list) / 示例海报（含素材需求清单）
-└── assets/           # Asset resources (with asset requirement list) / 素材资源（含素材需求清单）
-
-## Installation / 安装方式
-Send this repository link to an AI Agent that supports Skill installation (e.g., Claude Code, Codex) and say:
-将本仓库链接发送给支持 Skill 安装的 AI Agent（如 Claude Code、Codex 等），并说：
-> Install this Skill for me: https://github.com/{your-username}/cinema-summary-poster
-> 帮我安装这个 Skill：https://github.com/{your-username}/cinema-summary-poster
-
-Or manually copy `SKILL.md` to your Skill directory, and ensure a valid `.env` file exists in the same directory.
-或手动将 SKILL.md 复制到你的 Skill 目录中，并确保同级目录存在有效的 `.env` 文件。
-
-## Default Configuration / 默认配置
-- **Aspect Ratio / 画幅比例**: 3:4 (Portrait / 竖版)
-- **Title Font / 标题字体**: Songti Regular / 宋体 常规
-- **Body Font / 正文字体**: Kaiti Regular / 楷体 常规
-- **Watermark / 水印**: Disabled / 不添加
-- **Special Styles / 特殊风格**: Disabled / 不使用
-- **API Key**: Injected via `CINEMA_POSTER_API_KEY` environment variable / 通过 CINEMA_POSTER_API_KEY 环境变量注入
-
-## Changelog / 更新日志
-- **v1.2 (2026-08-18)**: Added security execution constraints, pre-release desensitization checklist, GitGuardian integration, and API Key management standards. / 增加安全执行约束、发布前脱敏检查、GitGuardian集成、API Key规范管理。
-- **v1.1 (2026-08-17)**: Optimized trigger words to avoid conflicts with generic poster Skills; standardized empty directory placeholder READMEs. / 优化触发词避免与通用海报 Skill 冲突；规范化空目录占位 README。
-- **v1.0 (2026-08-16)**: Initial release with complete prompt framework. / 初始版本，包含完整提示词框架。
-
-## License / 开源协议
-MIT
-
-
+├── SKILL.md                      # Core Skill Prompt / 核心 Skill 提示词
+├── README.md                     # This file / 本文件
+├── .env.example                  # API Key Environment Variable Template / API Key 环境变量模板
+├── references/
+│   ├── style-guide.md            # Genre-to-style mapping / 风格匹配指南
+│   └── font-spec.md              # Font rules & anti-garble spec / 字体规范与防乱码
+├── examples/
+│   └── good-example.md           # Positive/negative examples / 正例与反例参考
+└── assets/
+    └── README.md                 # Asset usage guide / 素材使用说明
 
 

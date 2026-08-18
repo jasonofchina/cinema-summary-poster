@@ -36,23 +36,18 @@ This is the most common failure point. Follow strictly.
 1. **Use Sans-serif for Foreign Titles / 外文片名用无衬线字体**
    English, Japanese, Korean titles → always Sans-serif. Serif strokes merge in AI generation.
    英文、日文、韩文片名统一用 Sans-serif，衬线字体笔画容易粘连。
-
 2. **Post-process Complex Text / 复杂文字后期叠字**
    Title > 6 characters or contains rare characters → do NOT let AI draw it.
    Generate background first, then overlay text with image editor.
    片名超 6 字或含生僻字，先让 AI 生成背景图，再用图片编辑工具叠字。
-
 3. **Limit Characters Per Line / 控制单行字数**
    Title ≤ 8 chars. Quote ≤ 20 chars. Otherwise wrap or trim.
    标题不超过 8 字，台词不超过 20 字，超过就换行或删减。
-
 4. **Character-by-Character Verification / 生成后逐字检查**
    Inspect every single character. Regenerate immediately if any garbling, missing stroke, or merging found.
    每个字都要看一遍，发现乱码、缺笔画、粘连立即重新生成。
-
 5. **Special Font Downgrade / 特殊字体降级机制**
-   If user requests calligraphy/art font, try once.
-   If readability drops, tell user: "This font causes AI garbling; recommend switching to Songti or Kaiti."
+   If user requests calligraphy/art font, try once. If readability drops, tell user: "This font causes AI garbling; recommend switching to Songti or Kaiti."
    用户要求书法体/花体时先尝试，可读性差则建议换成宋体或楷体。
 
 ### ❌ 3 Absolute Prohibitions / 绝对禁止的 3 件事
@@ -110,7 +105,7 @@ Naming convention: `{font-name}-{weight}.ttf`
 
 | Version / 版本 | Date / 日期 | Notes / 说明 |
 | :--- | :--- | :--- |
+| v2.0 | 2026-08-19 | Aligned version with SKILL.md v2.0 / 版本号与 SKILL.md v2.0 对齐 |
 | v1.2 | 2026-08-18 | Added Mode A prompt font-instruction spec / 新增模式 A prompt 字体说明规范 |
 | v1.1 | 2026-08-18 | Fixed font rule conflict: EN title changed to Sans-Serif; aligned path to assets/fonts/ / 修复字体规则冲突：英文标题改为无衬线体；路径对齐至 assets/fonts/ |
 | v1.0 | 2026-08-18 | Initial: Songti title + Kaiti body, anti-garble spec / 初始版本，明确宋体标题+楷体正文，新增防乱码规范 |
-

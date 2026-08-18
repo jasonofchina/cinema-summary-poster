@@ -2,11 +2,13 @@
 name: cinema-summary-poster
 description: |
   Generate a cinematic summary poster featuring classic quotes, core themes, and reviews based on the user's movie/TV series input and scene requirements.
+  Supports two output modes: (A) return a ready-to-use image-generation prompt (default, no API key needed); (B) directly generate the image using the user's own API key (key used once, never stored).
   根据用户输入的影视作品名称及场景需求，生成包含经典台词、主旨思想、评价信息的电影级总结海报。
-  
+  支持两种出图模式：(A) 返回可直接使用的生图 Prompt（默认，无需配置 API Key）；(B) 用户提供自备生图 API Key 直接生图（Key 仅本次使用，不保存不泄露）。
+
   Trigger words: "movie poster", "cinema summary poster", "movie recap visual", "电影海报", "剧集总结", "影视总结", "总结海报", "影视总结图".
   触发词：包含"电影海报""剧集总结""影视总结""总结海报""cinema summary poster""movie recap visual""影视总结图"等关键词。
-  
+
   Exclusions: Not for pure text reviews, generic non-film images, minor layout tweaks of existing designs, commercial/event posters, or content containing real PII.
   排除条件：不用于纯文字影评生成；不用于非影视题材的通用图片生成；不用于已有完整设计稿的微调排版；不用于通用商业海报、活动海报、产品宣传图设计；不用于包含真实个人信息的内容生成。
 ---
@@ -24,8 +26,10 @@ The poster must integrate the following core information (subject to user confir
 - Film reviews / ratings / 影片评价 / 评分
 - Other user-specified content / 其他用户指定内容
 
-The final output is a ready-to-use poster image with integrated text and visuals, matching the original film's tone.
-最终产出为一张可直接使用的成品海报图片，文字与画面一体，风格贴合原片调性。
+The final deliverable depends on the output mode:
+最终交付物取决于出图模式：
+- Mode A (default): a ready-to-use image-generation prompt (text). / 模式 A（默认）：可直接使用的生图 Prompt（文本）。
+- Mode B: a ready-to-use poster image with integrated text and visuals. / 模式 B：文字与画面一体的成品海报图片。
 
 ## When to use / 触发条件
 Trigger this Skill when the user expresses the following intents:
@@ -33,7 +37,7 @@ Trigger this Skill when the user expresses the following intents:
 - "Help me make a summary poster for [Movie Name]" / "帮我做一张《XXX》的总结海报"
 - "Generate a movie recap visual" / "生成一部电影的影视总结图"
 - "Make a poster for this show with a classic quote and theme" / "给这部剧做一张海报，要有经典台词和主旨"
-- Contains keywords like "movie poster", "cinema summary poster", "movie recap visual", "电影海报", "剧集总结", "影视总结", "cinema summary poster", "movie recap visual" / 包含相关中英文关键词
+- Contains keywords like "movie poster", "cinema summary poster", "movie recap visual", "电影海报", "剧集总结", "影视总结", "影视总结图" / 包含相关中英文关键词
 
 ## Do not use / 排除条件
 - User only requests pure text reviews or essays (no image needed) / 用户仅要求纯文字影评、观后感文章（无图片需求）
@@ -41,7 +45,7 @@ Trigger this Skill when the user expresses the following intents:
 - User already has a complete design and only needs minor font/color tweaks / 用户已有完整设计稿，仅需微调字体大小或颜色
 - User requests videos, GIFs, or non-static formats / 用户要求生成视频、动图、GIF 等非静态图片格式
 - User only mentions "poster" without any film/TV title / 用户仅提及 "poster" 但未关联任何影视作品名称
-- User requests real PII (names, private emails, local usernames, real test data) in the poster / 用户要求在海報中包含真实姓名、私人邮箱、电脑用户名、真人测试数据等个人信息
+- User requests real PII (names, private emails, local usernames, real test data) in the poster / 用户要求在海报中包含真实姓名、私人邮箱、电脑用户名、真人测试数据等个人信息
 
 ## Inputs to collect / 需要收集的信息
 
@@ -60,6 +64,11 @@ Trigger this Skill when the user expresses the following intents:
 10. Paper Texture: Parchment/Xuan paper/Coated paper/Sketch paper, etc. (Default: Auto-match by style) / 背景纸张材质：羊皮纸/宣纸/铜版纸/素描纸等（默认：根据剧情风格自动匹配）
 11. Watermark: Whether to add, color preference (Default: None) / 是否添加水印：以及水印颜色偏好（默认：不添加）
 12. Special Styles: Watercolor/Comic/Oil/Sketch/Abstract/Illustration (Default: None) / 特殊风格：水彩/漫画/油画/素描/抽象/插画（默认：不使用）
+13. Output Mode (choose one) / 出图模式（二选一）:
+    - A. Return Prompt — AI generates a detailed prompt; user takes it to MJ / Jimeng / SD etc. to generate the image (Default) / 返回 Prompt — 我生成详细 prompt，你自己拿去 MJ/即梦/SD 等生图（默认）
+    - B. Direct Generation — user provides their own image-generation API key; AI outputs the image directly / 直接生图 — 你提供自己的生图 API Key，我直接出图
+    - (Ask only if B is selected: which platform? what is the API key?) /（用户选 B 时才追问：用哪个平台？API Key 是什么？）
+    - Notice to user: the key is used only this once, never stored or leaked / 提示用户：Key 仅本次使用，不会存储或泄露
 
 ### Font Rules (Details for Item 9) / 字体规则（第 9 项展开）
 **Reference: references/font-spec.md**
@@ -84,19 +93,19 @@ Trigger this Skill when the user expresses the following intents:
 ## Procedure / 执行步骤
 
 ### Step -1: Security Check (MUST EXECUTE) / 安全检查（必须执行）
-1. Confirm `.env` exists and contains valid `CINEMA_POSTER_API_KEY` / 确认 `.env` 文件存在且包含有效 `CINEMA_POSTER_API_KEY`
-2. Check user input for suspected API Keys, Tokens, passwords, etc. / 检查用户输入是否包含疑似API Key、Token、密码等敏感字符串
-3. Check user input for real PII (names, private emails, local usernames) / 检查用户输入是否包含真实姓名、私人邮箱、电脑用户名等PII信息
-4. If any check fails, TERMINATE immediately and prompt user to correct / 若任一检查失败，立即终止执行并提示用户修正
+1. Check user input for suspected API Keys, Tokens, passwords, etc. If the user voluntarily provides a key for Mode B, proceed to Step 0.5 with the security notice; if a key appears in any other context, ask the user to remove it. / 检查用户输入是否包含疑似 API Key、Token、密码等敏感字符串。若用户为模式 B 主动提供 Key，按 Step 0.5 流程处理并给出安全告知；若 Key 出现在其他上下文，提示用户撤回。
+2. Check user input for real PII (names, private emails, local usernames). / 检查用户输入是否包含真实姓名、私人邮箱、电脑用户名等 PII 信息。
+3. Check whether `.env` exists (OPTIONAL): if it exists with `CINEMA_POSTER_API_KEY`, that key is for the developer's own testing only; if missing, DO NOT terminate — default to Mode A. / 检查 `.env` 是否存在（可选）：若存在且含 `CINEMA_POSTER_API_KEY`，该 Key 仅供开发者自测；若不存在，不终止，默认走模式 A。
+4. If PII or unexpected sensitive-info checks fail, TERMINATE immediately and prompt the user to correct. / 若 PII 或非预期敏感信息检查失败，立即终止执行并提示用户修正。
 
 ### Step 0: Requirement Confirmation (MUST EXECUTE) / 需求确认（必须执行）
 Confirm the following with user at once (do not ask one by one):
-向用户依次确认以下信息（一次性列出，不要逐条追问）：
+向用户一次性确认以下信息（不要逐条追问）：
 
 > Please confirm the following poster details, I will generate based on this:
 > 请确认以下海报信息，我会据此生成：
-> 1. ️ Film Name / 影片名称：___
-> 2. 🎬 Scene Requirements / 场景需求：___
+> 1. 🎬 Film Name / 影片名称：___
+> 2. 🎥 Scene Requirements / 场景需求：___
 > 3. 🎨 Base Style / 基本风格：___ (Default: Auto-match / 默认根据影片自动匹配)
 > 4. 📐 Aspect Ratio / 画幅比例：___ (Default: 3:4 Portrait / 默认 3:4 竖版)
 > 5. 💬 Classic Quote / 经典台词：___ (Default: AI selected / 默认由我选取)
@@ -107,12 +116,22 @@ Confirm the following with user at once (do not ask one by one):
 > 10. 📜 Paper Texture / 背景纸张材质：___ (Default: Auto-match / 默认根据剧情匹配)
 > 11. 💧 Add Watermark? / 是否添加水印：___ (Default: No / 默认不添加)
 > 12. 🖌️ Special Style / 特殊风格：___ (Default: None / 默认不使用)
+> 13. 🖼️ Output Mode / 出图模式：___ (A. Return Prompt, default / B. Direct generation, provide your own key / A. 返回 Prompt，默认 / B. 直接生图，需提供自备 Key)
 >
 > Reply "Confirm" or modify items accordingly.
 > 回复"确认"或修改对应项即可。
 
 Wait for user confirmation before proceeding.
 等待用户确认后再进入下一步。
+
+### Step 0.5: Output Mode Branch / 出图模式分叉
+- If user chose A (Return Prompt) / 若用户选 A（返回 Prompt）:
+  Follow the original flow (Steps 1-4) to compose the full prompt (visual description + style + palette + text hierarchy + font specs + aspect ratio), output it in Step 7, then end. No API key is needed at any point. / 按原有流程（Step 1-4）生成完整 prompt（画面描述+风格+配色+文字层级+字体说明+画幅参数），在 Step 7 输出后结束。全程无需任何 API Key。
+- If user chose B (Direct Generation) / 若用户选 B（直接生图）:
+  1. Confirm the API platform (e.g., Tongyi Wanxiang / Jimeng / Stable Diffusion / DALL·E). / 确认 API 平台（如：通义万相 / 即梦 / Stable Diffusion / DALL·E 等）。
+  2. Ask the user to provide that platform's API key, with a clear notice: used only this once, never stored, never leaked. / 请用户提供该平台的 API Key，并明确告知：仅本次使用，不保存不泄露。
+  3. Call the platform's image-generation interface with the composed prompt. / 调用对应平台的生图接口，传入已生成的 prompt。
+  4. Return the generated image; on failure (no network/tool capability, invalid key, quota exhausted, timeout), fall back to "Return Prompt" mode and explain. / 返回生成图片；若失败（无联网/工具能力、Key 无效、配额耗尽、超时），回退到"返回 Prompt"模式并说明原因。
 
 ### Step 1: Film Analysis & Style Tone Setting / 影片分析与风格定调
 **Reference: references/style-guide.md**
@@ -170,6 +189,7 @@ Based on text content confirmed in Step 0:
 2. Assign fonts per Font Rules / 按字体规则分配字体
 3. Determine text position (top/center/bottom/side) / 确定文字在画面中的位置
 4. Ensure text area does not conflict with main visual / 确保文字区域与画面主体不冲突
+5. In Mode A, all font/layout requirements must be written into the prompt as text instructions, and post-processing text overlay is recommended for complex text. / 模式 A 下，所有字体/排版要求必须以文字指令写入 prompt，并建议复杂文字后期叠字。
 
 ### Step 4: Overall Style Integration / 整体风格融合
 - Overall style must match plot setting, paper texture unified with visual style / 整体风格必须符合剧情设定，背景纸张材质与画面风格统一
@@ -195,8 +215,10 @@ When using special styles, apply uniformly to overall effect (including image an
 使用特殊风格时，整体效果（包括图像和人物）统一采用该风格。
 
 ### Step 7: Generation & Self-Check / 生成与自检
-After generating image, check each item:
-生成图片后，逐项自检：
+- Mode A: Output the complete structured prompt (visual + text + parameters), then self-check the prompt for completeness. / 模式 A：输出完整结构化 prompt（画面+文字+参数），并自检 prompt 完整性。
+- Mode B: Generate the image, then self-check each item below. / 模式 B：生成图片后，逐项自检：
+
+Self-check list / 自检清单：
 - [ ] No typos, no garbled text / 文字无错别字、无乱码
 - [ ] Clear font hierarchy (size/weight variations) / 字体层级清晰（粗细、大小有变化）
 - [ ] Appropriate letter spacing, not crowded / 字间距适当，排版不拥挤
@@ -207,14 +229,16 @@ After generating image, check each item:
 - [ ] Paper texture unified with style / 纸张材质与风格统一
 - [ ] Watermark (if any) positioned reasonably, does not interfere with reading / 水印（如有）位置合理、不干扰阅读
 - [ ] Correct aspect ratio (Default: 3:4) / 画幅比例正确（默认 3:4）
-- [ ] No real PII or sensitive credentials included / 未包含任何真实个人信息或敏感凭证
+- [ ] Mode A: prompt includes style, palette, text hierarchy, font specs and aspect ratio / 模式 A：prompt 包含风格、配色、文字层级、字体说明与画幅参数
+- [ ] Mode B: user's key is NOT written to any file, log, or reply / 模式 B：用户 Key 未写入任何文件、日志或回复
 
-If any item fails, correct and regenerate.
-如任一项不通过，修正后重新生成。
+If any item fails, correct and regenerate (Mode B failure triggers fallback to Mode A).
+如任一项不通过，修正后重新生成（模式 B 失败时触发回退到模式 A）。
 
 ### Step 8: Delivery & Confirmation / 交付与确认
-Show result to user and ask:
-向用户展示生成结果，并询问：
+- Mode A: Deliver the prompt text and ask whether the user needs adjustments. / 模式 A：交付 prompt 文本，并询问是否需要调整。
+- Mode B: Deliver the image (plus the prompt for the user's backup) and ask: / 模式 B：交付图片（附 prompt 供用户留档），并询问：
+
 > Poster generated, please check:
 > 海报已生成，请检查：
 > 1. Is text content accurate? / 文字内容是否准确？
@@ -224,17 +248,28 @@ Show result to user and ask:
 > Specify changes directly, I will regenerate.
 > 如需修改请直接说明，我会重新生成。
 
+## API Key Security Redlines / API Key 安全红线
+1. The user's API key is used only within this session; it is NEVER written to any file, log, or reply record. / 用户的 API Key 仅在本次会话内使用，绝不写入任何文件、日志或回复记录。
+2. NEVER record, restate, or display the user's complete API key. / 绝不记录、复述、展示用户的完整 API Key。
+3. NEVER use the developer's API key to generate images on behalf of the user. / 绝不使用开发者的 API Key 替用户生图。
+4. If the user has not voluntarily provided a key, ALWAYS use "Return Prompt" mode; never proactively demand a key. / 用户未主动提供 Key 时，一律走"返回 Prompt"模式，不主动索要。
+5. If the runtime environment lacks HTTP/image-generation tooling, automatically fall back to "Return Prompt" mode. / 若运行环境不具备联网/生图工具能力，自动回退到"返回 Prompt"模式。
+
 ## Output format / 输出格式
-Final deliverable is a static image with specs:
-最终交付物为一张静态图片，规格如下：
-- Aspect Ratio: Default 3:4 (Portrait), options: 4:3, 1:1, 16:9, 9:16 / 画幅比例：默认 3:4（竖版），可选 4:3、1:1、16:9、9:16
-- Image Style: Cinematic visual quality / 图片风格：电影级视觉品质
-- Text Content: Film name + Classic quote + Core theme + Review (per user selection) / 文字内容：片名 + 经典台词 + 主旨思想 + 评价（按用户确认取舍）
-- File Format: PNG or JPG / 文件格式：PNG 或 JPG
-- Resolution: Social media ready (short side ≥ 1080px recommended) / 分辨率：适配社交媒体发布（建议短边 ≥ 1080px）
+- Mode A (default) / 模式 A（默认）:
+  - Structured prompt text (image description + style/palette + text hierarchy + font specs + aspect ratio + negative hints). / 结构化 prompt 文本（画面描述+风格/配色+文字层级+字体说明+画幅参数+负面提示）。
+  - Can be saved as .md or .txt; ready to paste into MJ / Jimeng / SD / DALL·E. / 可保存为 .md 或 .txt，可直接粘贴到 MJ/即梦/SD/DALL·E 使用。
+- Mode B / 模式 B:
+  - A static poster image. Aspect Ratio: Default 3:4, options 4:3, 1:1, 16:9, 9:16 / 静态海报图片，画幅默认 3:4，可选 4:3、1:1、16:9、9:16
+  - Image Style: Cinematic visual quality / 图片风格：电影级视觉品质
+  - Text Content: Film name + Classic quote + Core theme + Review (per user selection) / 文字内容：片名 + 经典台词 + 主旨思想 + 评价（按用户确认取舍）
+  - File Format: PNG or JPG; short side ≥ 1080px recommended / 文件格式：PNG 或 JPG，建议短边 ≥ 1080px
 
 ## Definition of done / 完成标准
-- [ ] User confirmed all required and optional inputs / 用户确认了所有必填和可选输入项
+- [ ] User confirmed all required and optional inputs, including output mode / 用户确认了所有必填和可选输入项（含出图模式）
+- [ ] Output mode executed accordingly (A: prompt delivered; B: image delivered) / 按确认的出图模式执行（A 交付 prompt；B 交付图片）
+- [ ] Mode B: user's key used once only, never stored or displayed / 模式 B：用户 Key 仅用一次，未存储未展示
+- [ ] On Mode B failure, fell back to Mode A with a clear explanation / 模式 B 失败时成功回退模式 A 并说明原因
 - [ ] Visual style matches film genre / 画面风格与影片类型匹配
 - [ ] Text content accurate, no typos, no garbled text / 文字内容准确、无错别字、无乱码
 - [ ] Clear font hierarchy, concise readable layout / 字体层级清晰，排版简洁易读
@@ -253,13 +288,16 @@ Final deliverable is a static image with specs:
 - Special style severely conflicts with film tone: Explain conflict, suggest alternatives / 特殊风格与影片调性严重冲突：向用户说明冲突点，建议替代方案
 - Generated result has garbled text: Regenerate immediately, do not use garbled version / 生成结果出现乱码文字：立即重新生成，不使用含乱码的版本
 - User requests real person portrait: Explain limitations, suggest stylized/illustrated treatment / 用户要求添加现实人物肖像：说明生成限制，建议采用风格化或插画化处理
-- Detected API Key leak risk: Terminate immediately, prompt user to check .env and rotate key / 检测到API Key泄露风险：立即终止执行，提示用户检查.env文件并更换密钥
+- User chose B but environment cannot call external APIs: Explain and fall back to Mode A, output the full prompt / 用户选 B 但环境不支持外部 API 调用：说明并回退模式 A，输出完整 prompt
+- User's key invalid or quota exhausted: Do NOT retry with the developer's key; fall back to Mode A / 用户 Key 无效或配额耗尽：不用开发者 Key 重试，回退模式 A
+- API call timeout: Retry once; if still failing, fall back to Mode A / API 调用超时：重试一次，仍失败则回退模式 A
+- Detected unexpected API Key leak in user input: Terminate, prompt user to rotate the key / 检测到用户输入中意外泄露 API Key：终止执行，提示用户轮换密钥
 - User input contains real PII: Refuse generation, prompt to modify to fictional content / 用户输入包含真实个人信息：拒绝生成，提示修改为虚构内容
 
 ## Additional resources / 配套文件引用
 - references/style-guide.md: Film genre to visual style/paper material mapping spec / 影片风格与纸张材质匹配规范
-- references/font-spec.md: Font usage spec and readability standards / 字体使用规范与可读性标准
-- examples/good-example.md: Positive and negative example reference / 正例与反例参考
+- references/font-spec.md: Font usage spec, anti-garble rules and Mode A prompt font instructions / 字体使用规范、防乱码规则与模式 A prompt 字体说明
+- examples/good-example.md: Positive and negative examples, including a Mode A prompt example / 正例与反例参考（含模式 A prompt 范例）
 - assets/README.md: Asset resource usage guide / 素材资源使用说明
 
 All above files are created and maintained in their respective directories.

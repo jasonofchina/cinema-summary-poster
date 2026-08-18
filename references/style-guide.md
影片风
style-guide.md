@@ -7,6 +7,9 @@
 > 这份文档是"影视总结海报"的风格总纲。
 > AI 在执行 Step 1「影片分析与风格定调」时，必须先读取本文件，再决定海报的色调、质感、构图和纸张材质。
 > 所有规则都面向"完全不懂设计的小白"写成，照着抄就能用。
+>
+> Dual-mode note / 双模式说明: In Mode A (Return Prompt), the style descriptions from this guide must be quoted verbatim into the prompt so users can reproduce the look on any platform.
+> 模式 A（返回 Prompt）下，本指南的风格描述必须原文写入 prompt，便于用户在任何平台复现画面。
 
 ---
 
@@ -68,4 +71,20 @@ The following 5 principles apply to ALL posters without exception:
 | Scenario / 场景 | Primary / 主色 | Secondary / 辅色 | Accent / 点缀色 |
 | :--- | :--- | :--- | :--- |
 | Sci-fi Cool / 科幻冷峻 | Deep Blue #1a2a4a | Silver Gray #b0b8c4 | Neon Purple #8a5cf6 |
-| Period Rich / 古装厚重 | Ochre Red #8b3a2e | Warm Gold #c9
+| Period Rich / 古装厚重 | Ochre Red #8b3a2e | Warm Gold #c9a86a | Ink Black #1a1a1a |
+| Indie Gentle / 文艺温柔 | Off-white #f5f0e8 | Haze Blue #a8b8c8 | Warm Orange #d4956a |
+| Animation Bright / 动画明快 | Sky Blue #6ac1e4 | Bright Yellow #f5d76e | Grass Green #7ec850 |
+| Suspense Dark / 悬疑压抑 | Deep Black #0d0d0d | Dark Red #6e1a1a | Cool Green #2a4a3a |
+| Documentary Natural / 纪录片自然 | Earth Brown #8a6f47 | Natural Gray #b0a89a | Muted Blue #6a8a9a |
+
+> 💡 Usage / 使用方法: After confirming genre, pick one palette directly from this table. Do not create custom colors.
+> 确定影片类型后，直接从上表选一组颜色，不要自行调色。
+
+---
+
+## Changelog / 更新记录
+
+| Version / 版本 | Date / 日期 | Notes / 说明 |
+| :--- | :--- | :--- |
+| v1.1 | 2026-08-18 | Added dual-mode note: Mode A prompts must quote this guide verbatim / 新增双模式说明：模式 A prompt 需原文引用本指南 |
+| v1.0 | 2026-08-18 | Initial release covering 6 genres / 初始版本，覆盖六大影片类型 |

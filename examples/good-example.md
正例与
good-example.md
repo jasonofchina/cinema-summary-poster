@@ -1,11 +1,11 @@
 # ✅ Good & Bad Examples / 正例与反例参考
 
 > This document provides "copy-paste" templates for AI.
-> Before generating, review these 3 positive examples, then check the "Pitfall Checklist" to avoid mistakes.
+> Before generating, review these positive examples, then check the "Pitfall Checklist" to avoid mistakes.
 > All examples use fictional film titles; no real works referenced.
 >
 > 这份文档给 AI 提供"抄作业"的范本。
-> 生成海报前，先看这 3 个正面范例，再对照"反面提醒"避坑。
+> 生成海报前，先看正面范例，再对照"反面提醒"避坑。
 > 所有范例均使用虚构影片名称，不涉及任何真实作品。
 
 ---
@@ -103,6 +103,37 @@
 
 ---
 
+## Positive Example 4: Mode A Prompt Output / 正面范例 4：模式 A Prompt 输出
+
+> This shows what a correct Mode A deliverable looks like (using "Stardust Echo").
+> 这是模式 A 交付物的正确形态（以《星尘回响》为例）。
+
+```text
+[Image / 画面]
+Cinematic sci-fi poster, 3:4 portrait. Deep blue (#1a2a4a) solid electronic
+background, no code rain. Minimalist spaceship silhouette centered in lower
+third, metallic sheen, 3D render, ample whitespace (>=20%).
+
+[Text overlay (post-processing) / 文字（后期叠加）]
+- Title: "星尘回响" in Chinese Songti (Serif) Bold; "STARDUST ECHO" in
+  Sans-Serif, top 1/3 centered.
+- Quote: "我们不是在寻找家园，是在寻找自己。" in Songti, below title.
+- Body: "Douban 8.7 / IMDb 8.2" in Kaiti, bottom 1/3.
+- Note: "2026 · Sci-fi" in Songti Light, bottom-right.
+- Render background WITHOUT any text; overlay all text afterwards.
+
+[Parameters / 参数]
+Aspect ratio 3:4; negative prompt: code rain, clutter, realistic faces,
+garbled text, extra fonts.
+```
+
+### Key Takeaways / 要点总结
+- ✅ Prompt contains style, palette (with HEX), composition, text hierarchy, font specs, aspect ratio and negative hints. / prompt 包含风格、配色（含色值）、构图、文字层级、字体说明、画幅与负面提示。
+- ✅ Text is explicitly marked for post-processing overlay. / 明确标注文字后期叠加。
+- ✅ No API key is requested or included. / 全程不索要、不包含任何 API Key。
+
+---
+
 ## Pitfall Checklist / 反面提醒清单
 
 | # | Error Type / 错误类型 | Symptom / 具体表现 | Fix / 正确做法 |
@@ -115,6 +146,8 @@
 | 6 | Font Chaos / 字体混乱 | 5+ fonts on one poster / 同一张海报用5种字体 | Max 3: Songti title, Kaiti body, Songti annotation / 最多3种 |
 | 7 | Jarring Color / 色彩突兀 | Neon green in period drama / 古装片出现荧光绿 | Use color palette from style-guide.md / 按色卡选色 |
 | 8 | Oversized Watermark / 水印过大 | Watermark covers 30% of frame / 水印占画面30% | ≤10%, centered, single watermark / 占比≤10%，居中，单水印 |
+| 9 | Mode A Prompt Incomplete / 模式 A prompt 不完整 | Missing font specs or overlay instruction / 缺字体说明或叠字提示 | Include font specs + "overlay text in post-processing" / 必须包含字体说明与后期叠字提示 |
+| 10 | Key Mishandling / Key 处理不当 | Storing or restating user's API key / 存储或复述用户 Key | Use once, never store/display; fall back to Mode A on failure / 仅用一次，不存储不展示，失败回退模式 A |
 
 ---
 
@@ -122,5 +155,5 @@
 
 | Version / 版本 | Date / 日期 | Notes / 说明 |
 | :--- | :--- | :--- |
+| v1.1 | 2026-08-18 | Added Mode A prompt example and dual-mode pitfalls / 新增模式 A prompt 范例与双模式反例 |
 | v1.0 | 2026-08-18 | Initial: 3 positive examples (Sci-fi/Period/Animation) / 初始版本，覆盖科幻/古装/动画三类正例 |
-

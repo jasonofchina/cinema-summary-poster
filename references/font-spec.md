@@ -2,11 +2,11 @@
 
 > This document solves the #1 problem with AI-generated posters: garbled text.
 > All font rules MUST align with SKILL.md Font Rules:
-> **Titles use Songti (Serif); Body uses Kaiti (Script).**
+> **Chinese Titles use Songti (Serif); English Titles use Sans-Serif; Body uses Kaiti (Script).**
 >
 > 这份文档专门解决"AI 生成海报时文字出错"的问题。
 > 所有字体规则必须与 SKILL.md 中的「字体规则」保持一致：
-> **标题用宋体，正文用楷体。**
+> **中文标题用宋体，英文标题用无衬线体，正文用楷体。**
 
 ---
 
@@ -14,15 +14,15 @@
 
 | Text Level / 文字层级 | Chinese Font / 中文字体 | English Font / 英文字体 | Weight / 字重 | Content / 适用内容 |
 | :--- | :--- | :--- | :--- | :--- |
-| Main Title / 主标题 | Songti / 宋体 | Serif / 衬线 | Regular or Bold | Film/Series name / 电影/电视剧名称 |
-| Subtitle / 副标题 | Songti / 宋体 | Serif / 衬线 | Regular | Classic quote, one-line theme / 经典台词、一句话主旨 |
+| Main Title / 主标题 | Songti / 宋体 | Sans-Serif / 无衬线 | Regular or Bold | Film/Series name / 电影/电视剧名称 |
+| Subtitle / 副标题 | Songti / 宋体 | Sans-Serif / 无衬线 | Regular | Classic quote, one-line theme / 经典台词、一句话主旨 |
 | Body / 正文 | Kaiti / 楷体 | Kaiti / Script | Regular | Review, short comment, explanation / 影评、短评、阐释文字 |
 | Annotation / 注释 | Songti / 宋体 | Sans-serif / 无衬线 | Light | Rating source, year, credit / 评分来源、年份、署名 |
 
 > ⚠️ Critical Rules / 重要规则:
 > - Chinese titles MUST use Songti; never Heiti or Yuanti. / 中文标题必须用宋体，不能用黑体、圆体。
+> - English titles MUST use Sans-Serif to prevent AI stroke merging/garbling. / 英文标题必须用无衬线体，防止AI笔画粘连乱码。
 > - Chinese body MUST use Kaiti; never Songti (breaks hierarchy). / 中文正文必须用楷体，不能用宋体。
-> - English titles at title position MUST use Sans-serif to prevent AI stroke merging. / 英文片名在标题位置必须用无衬线字体。
 
 ---
 
@@ -97,5 +97,7 @@ Naming convention: `{font-name}-{weight}.ttf`
 
 | Version / 版本 | Date / 日期 | Notes / 说明 |
 | :--- | :--- | :--- |
+| v1.1 | 2026-08-18 | Fixed font rule conflict: EN title changed to Sans-Serif; aligned path to assets/fonts/ / 修复字体规则冲突：英文标题改为无衬线体；路径对齐至 assets/fonts/ |
 | v1.0 | 2026-08-18 | Initial: Songti title + Kaiti body, anti-garble spec / 初始版本，明确宋体标题+楷体正文，新增防乱码规范 |
+
 

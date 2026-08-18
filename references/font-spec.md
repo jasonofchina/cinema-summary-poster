@@ -21,7 +21,7 @@
 
 > ⚠️ Critical Rules / 重要规则:
 > - Chinese titles MUST use Songti; never Heiti or Yuanti. / 中文标题必须用宋体，不能用黑体、圆体。
-> - English titles MUST use Sans-Serif to prevent AI stroke merging/garbling. / 英文标题必须用无衬线体，防止AI笔画粘连乱码。
+> - English titles MUST use Sans-Serif to prevent AI stroke merging/garbling. / 英文标题必须用无衬线体，防止 AI 笔画粘连乱码。
 > - Chinese body MUST use Kaiti; never Songti (breaks hierarchy). / 中文正文必须用楷体，不能用宋体。
 
 ---
@@ -63,6 +63,19 @@ This is the most common failure point. Follow strictly.
 
 ---
 
+## Font Instructions in Mode A Prompts / 模式 A Prompt 中的字体说明规范
+
+When returning a prompt (Mode A), font and text requirements MUST be written into the prompt as explicit text instructions, e.g.:
+返回 Prompt（模式 A）时，必须把字体与文字要求以明确文本写入 prompt，例如：
+- "Title in Chinese Songti (Serif), English title in Sans-Serif." / "中文标题使用宋体（Serif），英文标题使用无衬线体（Sans-Serif）。"
+- "Body text in Kaiti (Script)." / "正文使用楷体。"
+- "Render the background WITHOUT text; overlay all text in post-processing." / "背景图不含文字，所有文字后期叠加。"
+
+This ensures users can reproduce correct typography on any external platform (MJ / Jimeng / SD / DALL·E).
+这样用户在任何外部平台（MJ/即梦/SD/DALL·E）都能复现正确排版。
+
+---
+
 ## Size Hierarchy & Layout / 字号层级与排版规范
 
 | Level / 层级 | Size Ratio (% of frame height) / 字号比例 | Position / 位置建议 |
@@ -97,7 +110,7 @@ Naming convention: `{font-name}-{weight}.ttf`
 
 | Version / 版本 | Date / 日期 | Notes / 说明 |
 | :--- | :--- | :--- |
+| v1.2 | 2026-08-18 | Added Mode A prompt font-instruction spec / 新增模式 A prompt 字体说明规范 |
 | v1.1 | 2026-08-18 | Fixed font rule conflict: EN title changed to Sans-Serif; aligned path to assets/fonts/ / 修复字体规则冲突：英文标题改为无衬线体；路径对齐至 assets/fonts/ |
 | v1.0 | 2026-08-18 | Initial: Songti title + Kaiti body, anti-garble spec / 初始版本，明确宋体标题+楷体正文，新增防乱码规范 |
-
 

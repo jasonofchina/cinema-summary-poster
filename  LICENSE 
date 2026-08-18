@@ -1,0 +1,26 @@
+
+#### 文件 3：`.env.example`
+
+```bash
+# Cinema Summary Poster API Configuration
+# ⚠️ DO NOT commit this file to version control!
+# Copy this file to .env and fill in your real key.
+# ⚠️ 请勿将此文件提交至版本控制系统！
+# 复制此文件为 .env 并填入真实密钥。
+
+# API Key for image generation service
+# Get yours at: https://example.com/api-keys
+# Rotation cycle: Every 30 days or immediately upon suspected leak
+# Quota setting: Recommended to set daily/monthly limits in provider dashboard
+# API 密钥获取地址：https://example.com/api-keys
+# 轮换周期：每30天或怀疑泄露时立即更换
+# 限额设置：建议在服务商后台设置每日/每月调用上限
+CINEMA_POSTER_API_KEY=your_api_key_here
+
+# Optional: Custom model endpoint (leave empty to use default)
+# 可选：自定义模型端点（留空则使用默认值）
+# CINEMA_POSTER_MODEL_ENDPOINT=
+
+# Optional: Request timeout in seconds (default: 60)
+# 可选：请求超时时间（秒），默认60
+# CINEMA_POSTER_TIMEOUT=60

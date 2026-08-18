@@ -58,4 +58,5 @@ The AI detects the intent and updates Item 7 during Step 0 confirmation.
 
 | Version | Date | Notes |
 | :--- | :--- | :--- |
+| v2.0 | 2026-08-19 | Aligned version with SKILL.md v2.0 / 与 SKILL.md v2.0 对齐 |
 | v1.0 | 2026-08-18 | Initial release / 初始版本 |

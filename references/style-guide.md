@@ -86,5 +86,6 @@ The following 5 principles apply to ALL posters without exception:
 
 | Version / 版本 | Date / 日期 | Notes / 说明 |
 | :--- | :--- | :--- |
+| v2.0 | 2026-08-19 | Aligned version with SKILL.md v2.0 / 版本号与 SKILL.md v2.0 对齐 |
 | v1.1 | 2026-08-18 | Added dual-mode note: Mode A prompts must quote this guide verbatim / 新增双模式说明：模式 A prompt 需原文引用本指南 |
 | v1.0 | 2026-08-18 | Initial release covering 6 genres / 初始版本，覆盖六大影片类型 |

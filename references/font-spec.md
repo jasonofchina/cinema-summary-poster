@@ -1,99 +1,101 @@
-# 文件路径：references/font-spec.md
+# 🔤 Font Specification / 海报字体使用规范
 
-# 🔤 海报字体使用规范（Font Spec）
-
+> This document solves the #1 problem with AI-generated posters: garbled text.
+> All font rules MUST align with SKILL.md Font Rules:
+> **Titles use Songti (Serif); Body uses Kaiti (Script).**
+>
 > 这份文档专门解决"AI 生成海报时文字出错"的问题。
 > 所有字体规则必须与 SKILL.md 中的「字体规则」保持一致：
 > **标题用宋体，正文用楷体。**
 
 ---
 
-## 一、默认字体方案（用户没特殊要求时）
+## Default Font Scheme / 默认字体方案
 
-| 文字层级 | 中文字体 | 英文字体 | 字重 | 适用内容 |
+| Text Level / 文字层级 | Chinese Font / 中文字体 | English Font / 英文字体 | Weight / 字重 | Content / 适用内容 |
 | :--- | :--- | :--- | :--- | :--- |
-| 主标题（片名） | 宋体 | Serif（衬线） | Regular 或 Bold | 电影/电视剧名称 |
-| 副标题（台词/主旨） | 宋体 | Serif | Regular | 经典台词、一句话主旨 |
-| 正文（评价/阐释） | 楷体 | Kaiti / Script | Regular | 影评、短评、阐释文字 |
-| 注释（来源/署名） | 宋体 | Sans-serif（无衬线） | Light | 评分来源、年份、署名 |
+| Main Title / 主标题 | Songti / 宋体 | Serif / 衬线 | Regular or Bold | Film/Series name / 电影/电视剧名称 |
+| Subtitle / 副标题 | Songti / 宋体 | Serif / 衬线 | Regular | Classic quote, one-line theme / 经典台词、一句话主旨 |
+| Body / 正文 | Kaiti / 楷体 | Kaiti / Script | Regular | Review, short comment, explanation / 影评、短评、阐释文字 |
+| Annotation / 注释 | Songti / 宋体 | Sans-serif / 无衬线 | Light | Rating source, year, credit / 评分来源、年份、署名 |
 
-> ⚠️ 重要：
-> - 中文标题必须用宋体，不能用黑体、圆体。
-> - 中文正文必须用楷体，不能用宋体（否则层级不清）。
-> - 英文片名如果出现在标题位置，使用无衬线字体（Sans-serif），避免衬线字体在 AI 出图时产生乱码。
+> ⚠️ Critical Rules / 重要规则:
+> - Chinese titles MUST use Songti; never Heiti or Yuanti. / 中文标题必须用宋体，不能用黑体、圆体。
+> - Chinese body MUST use Kaiti; never Songti (breaks hierarchy). / 中文正文必须用楷体，不能用宋体。
+> - English titles at title position MUST use Sans-serif to prevent AI stroke merging. / 英文片名在标题位置必须用无衬线字体。
 
 ---
 
-## 二、如何避免 AI 出图文字乱码（核心重点）
+## Preventing AI Garbled Text / 如何避免 AI 出图文字乱码
 
+This is the most common failure point. Follow strictly.
 这是本 Skill 最容易翻车的地方，必须严格遵守。
 
-### ✅ 必须做的 5 件事
+### ✅ 5 Mandatory Actions / 必须做的 5 件事
 
-1. **外文片名用无衬线字体**
-   - 英文、日文、韩文片名，统一用 Sans-serif。
-   - 原因：衬线字体在 AI 生成时笔画容易粘连。
+1. **Use Sans-serif for Foreign Titles / 外文片名用无衬线字体**
+   English, Japanese, Korean titles → always Sans-serif. Serif strokes merge in AI generation.
+   英文、日文、韩文片名统一用 Sans-serif，衬线字体笔画容易粘连。
 
-2. **复杂文字后期叠字**
-   - 如果片名超过 6 个字，或者包含生僻字，不要让 AI 直接画出来。
-   - 正确做法：先让 AI 生成背景图，再用图片编辑工具把文字"叠"上去。
+2. **Post-process Complex Text / 复杂文字后期叠字**
+   Title > 6 characters or contains rare characters → do NOT let AI draw it.
+   Generate background first, then overlay text with image editor.
+   片名超 6 字或含生僻字，先让 AI 生成背景图，再用图片编辑工具叠字。
 
-3. **控制单行字数**
-   - 标题不超过 8 个字。
-   - 台词不超过 20 个字。
-   - 超过就换行或删减。
+3. **Limit Characters Per Line / 控制单行字数**
+   Title ≤ 8 chars. Quote ≤ 20 chars. Otherwise wrap or trim.
+   标题不超过 8 字，台词不超过 20 字，超过就换行或删减。
 
-4. **生成后逐字检查**
-   - 每个字都要看一遍，发现乱码、缺笔画、粘连，立即重新生成。
-   - 不要抱着"差不多就行"的心态。
+4. **Character-by-Character Verification / 生成后逐字检查**
+   Inspect every single character. Regenerate immediately if any garbling, missing stroke, or merging found.
+   每个字都要看一遍，发现乱码、缺笔画、粘连立即重新生成。
 
-5. **特殊字体降级机制**
-   - 如果用户要求书法体、花体、艺术字，先尝试生成。
-   - 如果生成结果可读性差，必须告诉用户："这个字体 AI 画出来容易乱码，建议换成宋体或楷体。"
+5. **Special Font Downgrade / 特殊字体降级机制**
+   If user requests calligraphy/art font, try once.
+   If readability drops, tell user: "This font causes AI garbling; recommend switching to Songti or Kaiti."
+   用户要求书法体/花体时先尝试，可读性差则建议换成宋体或楷体。
 
-### ❌ 绝对禁止的 3 件事
+### ❌ 3 Absolute Prohibitions / 绝对禁止的 3 件事
 
-1. **禁止使用连笔字、草书、狂草**
-   - AI 无法准确还原连笔，100% 会乱码。
-
-2. **禁止在画面中放超过 3 种字体**
-   - 字体太多会导致 AI 混淆，出现错误字形。
-
-3. **禁止让 AI 生成"手写体"中文**
-   - 手写体笔画不稳定，极易缺字。
+1. **Never use cursive/grass script / 禁止连笔字、草书、狂草** — AI cannot reproduce connected strokes accurately.
+2. **Never use >3 fonts per poster / 禁止超过 3 种字体** — Causes AI confusion and incorrect glyphs.
+3. **Never ask AI to generate handwritten Chinese / 禁止 AI 生成手写体中文** — Unstable strokes, near-certain missing characters.
 
 ---
 
-## 三、字号层级与排版规范
+## Size Hierarchy & Layout / 字号层级与排版规范
 
-| 层级 | 字号比例（相对画面高度） | 位置建议 |
+| Level / 层级 | Size Ratio (% of frame height) / 字号比例 | Position / 位置建议 |
 | :--- | :--- | :--- |
-| 主标题 | 8% - 12% | 画面上方 1/3 或正中央 |
-| 副标题 | 5% - 7% | 主标题下方，间距 = 主标题字高 × 0.5 |
-| 正文 | 3% - 5% | 画面下方 1/3 或侧边 |
-| 注释 | 2% - 3% | 画面底部或角落 |
+| Main Title / 主标题 | 8% - 12% | Top 1/3 or center / 画面上方 1/3 或正中央 |
+| Subtitle / 副标题 | 5% - 7% | Below title, gap = title height × 0.5 / 主标题下方 |
+| Body / 正文 | 3% - 5% | Bottom 1/3 or side / 画面下方 1/3 或侧边 |
+| Annotation / 注释 | 2% - 3% | Bottom edge or corner / 画面底部或角落 |
 
-### 排版通用要求
-- 字间距：标题 = 字宽 × 0.1，正文 = 字宽 × 0.05。
-- 行间距：正文行距 = 字高 × 1.5。
-- 对齐方式：标题居中，正文左对齐或居中，注释右对齐。
+### General Typography Rules / 排版通用要求
+- Letter spacing: Title = char width × 0.1; Body = char width × 0.05. / 字间距
+- Line height: Body = char height × 1.5. / 行间距
+- Alignment: Title centered; Body left-aligned or centered; Annotation right-aligned. / 对齐方式
 
 ---
 
-## 四、字体文件放置说明
+## Font File Placement / 字体文件放置说明
 
-如果未来需要上传真实字体文件，请放在 `assets/fonts/` 目录下。
-命名规范：`{字体名}-{字重}.ttf`，例如：
+Future font files go in `assets/fonts/`.
+Naming convention: `{font-name}-{weight}.ttf`
+未来字体文件放在 `assets/fonts/`，命名规范如下：
 - `songti-regular.ttf`
 - `kaiti-regular.ttf`
 - `noto-sans-medium.ttf`
 
-> 📌 注意：字体文件必须使用开源可商用字体，禁止使用未授权的商业字体。
+> 📌 Only open-source commercially licensed fonts allowed. No unauthorized commercial fonts.
+> 字体文件必须使用开源可商用字体，禁止使用未授权的商业字体。
 
 ---
 
-## 五、更新记录
+## Changelog / 更新记录
 
-| 版本 | 日期 | 说明 |
+| Version / 版本 | Date / 日期 | Notes / 说明 |
 | :--- | :--- | :--- |
-| v1.0 | 2026-08-18 | 初始版本，明确宋体标题 + 楷体正文，新增防乱码规范 |
+| v1.0 | 2026-08-18 | Initial: Songti title + Kaiti body, anti-garble spec / 初始版本，明确宋体标题+楷体正文，新增防乱码规范 |
+

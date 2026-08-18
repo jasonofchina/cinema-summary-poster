@@ -109,4 +109,18 @@
 | :--- | :--- | :--- | :--- |
 | 1 | Garbled Text / 文字乱码 | Unknown characters, missing strokes / 不认识的字符、缺笔画 | Regenerate immediately or post-process text / 立即重新生成或后期叠字 |
 | 2 | Element Clutter / 元素堆砌 | >10 elements in frame / 画面塞了10个以上元素 | Max 5 subjects, ≥20% whitespace / 主体≤5个，留白≥20% |
-| 3 | Text Obscures Subject / 文字遮挡主体 | Quote overlaid on character face / 台词压在人物脸上 | Reposition text or simplify background
+| 3 | Text Obscures Subject / 文字遮挡主体 | Quote overlaid on character face / 台词压在人物脸上 | Reposition text or simplify background / 调整文字位置或降低背景复杂度 |
+| 4 | Real Human Face / 生成真人脸 | AI generates real celebrity likeness / AI生成真实明星脸 | Use stylized/illustrated treatment / 改用风格化/插画化处理 |
+| 5 | Style Conflict / 风格冲突 | Period drama with Xuan paper bg / 科幻片用了宣纸背景 | Follow style-guide.md strictly / 严格按 style-guide.md 匹配 |
+| 6 | Font Chaos / 字体混乱 | 5+ fonts on one poster / 同一张海报用5种字体 | Max 3: Songti title, Kaiti body, Songti annotation / 最多3种 |
+| 7 | Jarring Color / 色彩突兀 | Neon green in period drama / 古装片出现荧光绿 | Use color palette from style-guide.md / 按色卡选色 |
+| 8 | Oversized Watermark / 水印过大 | Watermark covers 30% of frame / 水印占画面30% | ≤10%, centered, single watermark / 占比≤10%，居中，单水印 |
+
+---
+
+## Changelog / 更新记录
+
+| Version / 版本 | Date / 日期 | Notes / 说明 |
+| :--- | :--- | :--- |
+| v1.0 | 2026-08-18 | Initial: 3 positive examples (Sci-fi/Period/Animation) / 初始版本，覆盖科幻/古装/动画三类正例 |
+

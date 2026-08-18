@@ -1,4 +1,3 @@
-
 ---
 name: cinema-summary-poster
 description: |

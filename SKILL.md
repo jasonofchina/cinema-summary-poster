@@ -68,17 +68,13 @@ Trigger this Skill when the user expresses the following intents:
 11. Watermark: Whether to add, color preference (Default: None) / 是否添加水印：以及水印颜色偏好（默认：不添加）
 12. Special Styles: Watercolor/Comic/Oil/Sketch/Abstract/Illustration (Default: None) / 特殊风格：水彩/漫画/油画/素描/抽象/插画（默认：不使用）
 13. Output Mode (choose one) / 出图模式（二选一）:
-    - A. Return Prompt — AI generates a detailed prompt; user takes it to MJ / Jimeng / SD etc. to generate the image (Default)
-      / 返回 Prompt — AI 生成详细 prompt，用户拿去 MJ/即梦/SD 等出图（默认）
-    - B. Direct Generation — user provides their own image-gen API key; AI generates directly (key used once, never stored)
-      / 直接生图 — 用户提供自备生图 API Key，AI 直接出图（Key 仅本次使用，不保存不泄露）
+    - A. Return Prompt — AI generates a detailed prompt; user takes it to MJ / Jimeng / SD etc. to generate the image (Default) / 返回 Prompt — AI 生成详细 prompt，用户拿去 MJ/即梦/SD 等出图（默认）
+    - B. Direct Generation — user provides their own image-gen API key; AI generates directly (key used once, never stored) / 直接生图 — 用户提供自备生图 API Key，AI 直接出图（Key 仅本次使用，不保存不泄露）
 14. Quote Candidate Pool (Optional; Default: AI selects the most iconic one) / 台词备选池（可选；默认：AI 选最经典一句）
-    - AI proposes 3 candidate quotes (tagged: philosophical / emotional / plot), user picks one.
-      / AI 给出 3 句候选台词（标注类型：哲理 / 情感 / 剧情），用户三选一。
+    - AI proposes 3 candidate quotes (tagged: philosophical / emotional / plot), user picks one. / AI 给出 3 句候选台词（标注类型：哲理 / 情感 / 剧情），用户三选一。
     - If user does not specify, use the first (most iconic) quote. / 用户未指定时，默认采用第 1 句（最经典）。
 15. Rating Source (Optional; Default: Douban + IMDb) / 评分数据源（可选；默认：豆瓣 + IMDb）
-    - Options: Douban / IMDb / Rotten Tomatoes / Maoyan / Mtime; awards display (Oscar / Palme d'Or / HKFA) optional.
-      / 可选：豆瓣 / IMDb / 烂番茄 / 猫眼 / 时光网；是否展示获奖记录（奥斯卡 / 金棕榈 / 金像奖）可选。
+    - Options: Douban / IMDb / Rotten Tomatoes / Maoyan / Mtime; awards display (Oscar / Palme d'Or / HKFA) optional. / 可选：豆瓣 / IMDb / 烂番茄 / 猫眼 / 时光网；是否展示获奖记录（奥斯卡 / 金棕榈 / 金像奖）可选。
 
 ## Font Rules / 字体规则
 - Chinese title: Songti (Serif). / 中文标题：宋体。
@@ -89,8 +85,7 @@ Trigger this Skill when the user expresses the following intents:
 - Complex text (>6 chars title, rare characters): generate background first, overlay text in post-processing. / 复杂文字（片名超 6 字、生僻字）：先出背景图，再后期叠字。
 
 ## Security Rules / 安全规范（API Key 处理）
-1. User's API key is used only within the current session; never written to files, logs, or reply records.
-   用户的 API Key 仅在本次会话内使用，绝不写入任何文件、日志或回复记录。
+1. User's API key is used only within the current session; never written to files, logs, or reply records. / 用户的 API Key 仅在本次会话内使用，绝不写入任何文件、日志或回复记录。
 2. Never record, restate, or display the user's full API key. / 绝不记录、复述、展示用户的完整 API Key。
 3. Never use the developer's API key to generate images for users. / 绝不使用开发者的 API Key 替用户生图。
 4. When the user does not proactively provide a key, always use Mode A; do not solicit keys. / 用户未主动提供 Key 时，一律走模式 A，不主动索要。
@@ -99,20 +94,16 @@ Trigger this Skill when the user expresses the following intents:
 ## Workflow / 工作流
 
 ### Step -1: Security Check / 安全检查
-- Detect PII in user input; refuse generation and prompt to use fictional content if real PII detected.
-  检测用户输入中的个人信息；若发现真实 PII，拒绝生成并提示改用虚构内容。
-- Check `.env` (optional): missing → Mode A. If exists with a developer key, it is for developer self-testing only, never used to generate for users.
-  检查 `.env`（可选）：缺失则走模式 A；若存在开发者 Key，仅供开发者自测，不用于替用户生图。
+- Detect PII in user input; refuse generation and prompt to use fictional content if real PII detected. / 检测用户输入中的个人信息；若发现真实 PII，拒绝生成并提示改用虚构内容。
+- Check `.env` (optional): missing → Mode A. If exists with a developer key, it is for developer self-testing only, never used to generate for users. / 检查 `.env`（可选）：缺失则走模式 A；若存在开发者 Key，仅供开发者自测，不用于替用户生图。
 
 ### Step 0: Requirement Confirmation / 需求确认
 - Confirm the 15 items above (Required + Optional). / 确认上述 15 项（必填 + 可选）。
-- If in series/episode mode, also confirm episode range, unified style, differentiated element, and output pace (see references/series-mode.md).
-  若为系列/分集模式，另行确认集数范围、是否统一样式、差异化元素、输出节奏（见 references/series-mode.md）。
+- If in series/episode mode, also confirm episode range, unified style, differentiated element, and output pace (see references/series-mode.md). / 若为系列/分集模式，另行确认集数范围、是否统一样式、差异化元素、输出节奏（见 references/series-mode.md）。
 
 ### Step 0.5: Output Mode Branch / 出图模式分叉
 - Mode A: proceed to generate a detailed prompt. / 模式 A：进入生成详细 prompt 流程。
-- Mode B: request the user's API key and platform (e.g., Tongyi Wanxiang / Jimeng / Stable Diffusion / DALL·E), then call the corresponding image API.
-  模式 B：请用户提供 API Key 与平台（如通义万相 / 即梦 / Stable Diffusion / DALL·E），并调用对应生图接口。
+- Mode B: request the user's API key and platform (e.g., Tongyi Wanxiang / Jimeng / Stable Diffusion / DALL·E), then call the corresponding image API. / 模式 B：请用户提供 API Key 与平台（如通义万相 / 即梦 / Stable Diffusion / DALL·E），并调用对应生图接口。
 
 ### Step 0.6: Text Summary Card (Pre-generation Confirmation) / 纯文字摘要卡（出图前确认）
 Before generating the image, output a plain-text summary card for confirmation to avoid wasting image-generation quota on wrong info:
@@ -129,13 +120,11 @@ Before generating the image, output a plain-text summary card for confirmation t
 Proceed to Step 1 only after the user confirms (e.g., replies "确认"). / 用户确认无误（如回复"确认"）后再进入 Step 1。
 
 ### Step 1: Film Analysis & Style Tone Setting / 影片分析与风格定调
-- Confirm the genre and fetch/verify basic info (year, rating, awards) via search; never fabricate data.
-  确认影片类型，并通过检索获取/核对基本信息（年份、评分、获奖），绝不编造数据。
+- Confirm the genre and fetch/verify basic info (year, rating, awards) via search; never fabricate data. / 确认影片类型，并通过检索获取/核对基本信息（年份、评分、获奖），绝不编造数据。
 - Determine style tone and palette via references/style-guide.md. / 依据 references/style-guide.md 确定风格与配色。
 
 ### Step 2: Visual Composition Design / 画面构图设计
-- Design characters + background per references/style-guide.md (whitespace ≥20%, main subjects ≤5).
-  依据 references/style-guide.md 设计人物与背景（留白 ≥20%，主体 ≤5 个）。
+- Design characters + background per references/style-guide.md (whitespace ≥20%, main subjects ≤5). / 依据 references/style-guide.md 设计人物与背景（留白 ≥20%，主体 ≤5 个）。
 
 ### Step 3: Typography & Text Layout / 文字内容编排
 - Apply font rules and anti-garble spec per references/font-spec.md. / 依据 references/font-spec.md 应用字体规则与防乱码规范。
@@ -148,8 +137,7 @@ Proceed to Step 1 only after the user confirms (e.g., replies "确认"). / 用�
 ### Step 6: Special Style Processing (Optional) / 特殊风格处理（可选）
 
 ### Step 7: Generation & Self-Check / 生成与自检
-- Mode A: write font/text requirements into the prompt (see references/font-spec.md), and append negative prompts (see references/negative-prompts.md).
-  模式 A：将字体与文字要求写入 prompt（见 references/font-spec.md），并附加负面提示词（见 references/negative-prompts.md）。
+- Mode A: write font/text requirements into the prompt (see references/font-spec.md), and append negative prompts (see references/negative-prompts.md). / 模式 A：将字体与文字要求写入 prompt（见 references/font-spec.md），并附加负面提示词（见 references/negative-prompts.md）。
 - Mode B: pass negative prompts as the `negative_prompt` parameter. / 模式 B：将负面提示词作为 `negative_prompt` 参数传入。
 - Self-check: key-safety items, no garbled text, no real PII. / 自检：Key 安全项、无乱码、无真实 PII。
 

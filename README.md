@@ -79,7 +79,3 @@ Or manually copy `SKILL.md` to your Skill directory. No `.env` is required for M
 
 ## License / 开源协议
 MIT
-
-
-
-

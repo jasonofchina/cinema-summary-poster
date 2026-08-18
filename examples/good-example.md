@@ -155,5 +155,6 @@ garbled text, extra fonts.
 
 | Version / 版本 | Date / 日期 | Notes / 说明 |
 | :--- | :--- | :--- |
+| v2.0 | 2026-08-19 | Aligned version with SKILL.md v2.0 / 版本号与 SKILL.md v2.0 对齐 |
 | v1.1 | 2026-08-18 | Added Mode A prompt example and dual-mode pitfalls / 新增模式 A prompt 范例与双模式反例 |
 | v1.0 | 2026-08-18 | Initial: 3 positive examples (Sci-fi/Period/Animation) / 初始版本，覆盖科幻/古装/动画三类正例 |
